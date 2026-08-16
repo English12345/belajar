@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kosakata Saya — English Reading Nook</title>
+<script>(function(){if(localStorage.getItem("erb_theme")==="comfort"){document.documentElement.setAttribute("data-theme","comfort");}})();</script>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">📖</span>
+      <span class="brand-name">Reading Nook</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Cerita</a>
+      <a href="vocab.html" class="active">Kosakata Saya <span class="vocab-pill">0</span></a>
+      <button id="theme-toggle" class="eye-toggle" type="button">🌙 Mode Nyaman Mata</button>
+    </div>
+  </nav>
+
+  <div class="shell">
+    <div class="reader-header">
+      <div class="eyebrow">Buku catatan kata pribadimu</div>
+      <h1 class="serif-display" style="font-size:2.1rem; margin:.3rem 0;">Kosakata Saya</h1>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        Semua kata yang kamu simpan dari cerita-cerita akan muncul di sini.
+        Tersimpan langsung di browser ini (tidak dikirim ke mana-mana).
+      </p>
+    </div>
+
+    <div id="vocab-list" class="vocab-list"></div>
+  </div>
+
+  <footer class="site-foot">Reading Nook · daftar kosakata tersimpan secara lokal di perangkatmu</footer>
+
+  <script src="assets/js/stories-data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    function render() {
+      const container = document.getElementById("vocab-list");
+      const store = loadVocab();
+      const words = Object.values(store).sort((a, b) => b.savedAt - a.savedAt);
+
+      if (words.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="big">🗂️</div>
+            <p>Belum ada kata yang tersimpan.<br/>Buka salah satu cerita, klik sebuah kata, lalu tekan ♡ untuk menyimpannya.</p>
+            <a class="btn btn-primary" href="index.html" style="margin-top:.8rem; text-decoration:none;">← Mulai baca cerita</a>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = words
+        .map(
+          (w) => `
+        <div class="vocab-row" data-word="${w.word}">
+          <div class="vword">${w.word}</div>
+          <div class="vmeta">
+            ${w.translation ? `<strong>${w.translation}</strong> — ` : ""}${
+              w.definition || "<i>tanpa definisi</i>"
+            }
+            <div class="vfrom">dari: ${w.source || "-"}</div>
+          </div>
+          <button class="icon-btn speak-btn" title="Dengarkan">🔊</button>
+          <button class="icon-btn delete-btn" title="Hapus">🗑</button>
+        </div>`
+        )
+        .join("");
+
+      container.querySelectorAll(".speak-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const word = e.target.closest(".vocab-row").dataset.word;
+          speak(word);
+        });
+      });
+      container.querySelectorAll(".delete-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const row = e.target.closest(".vocab-row");
+          removeFromVocab(row.dataset.word);
+          refreshVocabPill();
+          render();
+        });
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

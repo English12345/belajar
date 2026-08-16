@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>English Reading Nook — Belajar Bahasa Inggris Lewat Cerita</title>
+<script>(function(){if(localStorage.getItem("erb_theme")==="comfort"){document.documentElement.setAttribute("data-theme","comfort");}})();</script>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">📖</span>
+      <span class="brand-name">Reading Nook</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Cerita</a>
+      <a href="vocab.html">Kosakata Saya <span class="vocab-pill">0</span></a>
+      <button id="theme-toggle" class="eye-toggle" type="button">🌙 Mode Nyaman Mata</button>
+    </div>
+  </nav>
+
+  <div class="shell">
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Belajar membaca · sedikit demi sedikit</div>
+        <h1>Hafal kosakata dengan <em>membaca cerita</em>, bukan menghafal daftar kata.</h1>
+        <p class="lede">
+          Klik kata mana pun dalam cerita untuk melihat artinya dalam Bahasa
+          Indonesia, definisi bahasa Inggrisnya, dan tombol suara untuk
+          mendengar cara membacanya. Kata yang kamu suka bisa langsung
+          disimpan ke daftar kosakata pribadimu.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-block">
+            <div class="num" id="stat-stories">0</div>
+            <div class="lbl">Cerita tersedia</div>
+          </div>
+          <div class="stat-block">
+            <div class="num" id="stat-vocab">0</div>
+            <div class="lbl">Kata tersimpan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Cara pakai</h3>
+        <ol>
+          <li>Pilih satu cerita di bawah, mulai dari level <mark>Pemula</mark>.</li>
+          <li>Baca pelan-pelan. Klik <mark>kata</mark> yang belum kamu tahu.</li>
+          <li>Tekan tombol 🔊 untuk dengar pengucapannya.</li>
+          <li>Tekan ♡ untuk menyimpannya ke <em>Kosakata Saya</em>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-level="all">Semua</button>
+      <button class="filter-btn" data-level="Pemula">Pemula</button>
+      <button class="filter-btn" data-level="Menengah">Menengah</button>
+    </div>
+
+    <div class="story-grid" id="story-grid"></div>
+
+  </div>
+
+  <footer class="site-foot">dibuat untuk menemani jam membacamu ✨ — tambahkan cerita barumu sendiri di folder <code>stories/</code></footer>
+
+  <script src="assets/js/stories-data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    function levelClass(level) {
+      return "level-" + level.replace(/\s+/g, "-");
+    }
+
+    function renderGrid(filter) {
+      const grid = document.getElementById("story-grid");
+      grid.innerHTML = "";
+      const list = STORIES.filter((s) => filter === "all" || s.level === filter);
+      list.forEach((s) => {
+        const a = document.createElement("a");
+        a.href = s.file;
+        a.className = "story-card";
+        a.innerHTML = `
+          <span class="tape"></span>
+          <div class="card-top">
+            <span class="card-emoji">${s.emoji}</span>
+            <span class="level-tag ${levelClass(s.level)}">${s.level}</span>
+          </div>
+          <h3>${s.title}</h3>
+          <p class="title-id">${s.titleId}</p>
+          <p>${s.summary}</p>
+          <div class="card-meta">
+            <span>📝 ${s.words} kata</span>
+            <span>⏱ ${s.minutes} menit</span>
+          </div>
+        `;
+        grid.appendChild(a);
+      });
+    }
+
+    document.getElementById("stat-stories").textContent = STORIES.length;
+    document.getElementById("stat-vocab").textContent = vocabCount();
+
+    renderGrid("all");
+
+    document.getElementById("filter-bar").addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-btn");
+      if (!btn) return;
+      document
+        .querySelectorAll(".filter-btn")
+        .forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderGrid(btn.dataset.level);
+    });
+  </script>
+</body>
+</html>
