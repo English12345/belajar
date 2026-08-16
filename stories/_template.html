@@ -1,0 +1,82 @@
+<!--
+  TEMPLATE CERITA BARU
+  =====================
+  Cara pakai:
+  1. Copy file ini, ganti nama misalnya: stories/my-new-story.html
+  2. Ganti <title> dan semua teks bertanda [GANTI...]
+  3. Tulis ceritamu sebagai paragraf biasa di dalam <div id="story-text">.
+     Tidak perlu menandai kata secara manual -- sistem akan otomatis
+     membuat setiap kata bisa diklik.
+  4. Daftarkan cerita ini di assets/js/stories-data.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>[GANTI: Story Title] — English Reading Nook</title>
+<script>(function(){if(localStorage.getItem("erb_theme")==="comfort"){document.documentElement.setAttribute("data-theme","comfort");}})();</script>
+<link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">📖</span>
+      <span class="brand-name">Reading Nook</span>
+    </a>
+    <div class="nav-links">
+      <a href="../index.html">Cerita</a>
+      <a href="../vocab.html">Kosakata Saya <span class="vocab-pill">0</span></a>
+      <button id="theme-toggle" class="eye-toggle" type="button">🌙 Mode Nyaman Mata</button>
+    </div>
+  </nav>
+
+  <div class="shell">
+    <div class="reader-header">
+      <a href="../index.html" class="back-link">← Kembali ke daftar cerita</a>
+      <div class="reader-title-row">
+        <div>
+          <h1>[GANTI: Story Title]</h1>
+          <p class="title-id">[GANTI: Judul dalam Bahasa Indonesia]</p>
+        </div>
+      </div>
+      <div class="reader-toolbar">
+        <button class="btn btn-primary" id="read-aloud-btn">🔊 Bacakan cerita</button>
+        <button class="btn btn-ghost" id="toggle-translation-btn">👁 Lihat Arti Cerita</button>
+      </div>
+      <div class="hint-banner">
+        💡 Klik kata apa pun di bawah untuk melihat artinya, atau tekan "Lihat Arti Cerita" untuk melihat terjemahan tiap paragraf sekaligus.
+      </div>
+    </div>
+
+    <!--
+      Setiap paragraf ditulis berpasangan:
+      - p.story-en  -> teks bahasa Inggris (kata-katanya otomatis bisa diklik)
+      - p.story-id  -> terjemahan Indonesia (muncul saat tombol "Lihat Arti" ditekan)
+    -->
+    <article class="story-paper">
+      <div id="story-text">
+        <div class="para-pair">
+          <p class="story-en">[GANTI: paragraf pertama ceritamu di sini.]</p>
+          <p class="story-id">[GANTI: terjemahan Indonesia paragraf pertama.]</p>
+        </div>
+        <div class="para-pair">
+          <p class="story-en">[GANTI: paragraf kedua ceritamu di sini.]</p>
+          <p class="story-id">[GANTI: terjemahan Indonesia paragraf kedua.]</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="story-footer-nav">
+      <a href="../index.html" class="btn btn-ghost" style="text-decoration:none;">← Semua cerita</a>
+      <a href="../vocab.html" class="btn btn-ghost" style="text-decoration:none;">Lihat kosakata saya →</a>
+    </div>
+  </div>
+
+  <footer class="site-foot">Reading Nook</footer>
+
+  <script src="../assets/js/stories-data.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>
