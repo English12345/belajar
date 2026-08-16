@@ -589,3 +589,79 @@ footer.site-foot{
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; scroll-behavior:auto !important; }
 }
+
+/* ============================================================
+   MOBILE FIXES (≤640px)
+   ============================================================ */
+body{ overflow-x:hidden; }
+
+@media (max-width:640px){
+  .site-nav{
+    flex-wrap:wrap;
+    row-gap:.55rem;
+    padding:1rem 1rem .3rem;
+  }
+  .brand-name{ font-size:1.05rem; }
+  .brand-mark{ width:32px; height:32px; font-size:1rem; }
+  .nav-links{
+    width:100%;
+    justify-content:space-between;
+    gap:.5rem;
+    font-size:.72rem;
+  }
+  .eye-toggle{
+    font-size:.68rem;
+    padding:.4rem .6rem;
+  }
+
+  .shell{ padding:0 1rem 3rem; }
+
+  .hero{ padding:1rem 0 1.2rem; gap:1.4rem; }
+  .hero p.lede{ font-size:.95rem; }
+  .hero-stats{ gap:1.1rem; }
+  .hero-card{
+    transform:none;
+    padding:1.2rem;
+  }
+  .hero-card::before{ left:20px; }
+
+  .filter-bar{ gap:.5rem; margin:1.2rem 0 1.4rem; }
+  .filter-btn{ font-size:.72rem; padding:.4rem .75rem; }
+
+  .story-grid{
+    grid-template-columns:1fr;
+    gap:1rem;
+  }
+  .story-card:hover{ transform:none; }
+
+  .reader-header{ padding:1.1rem 0 .4rem; }
+  .reader-toolbar{ gap:.5rem; }
+  .btn{ font-size:.72rem; padding:.55rem .9rem; }
+  .hint-banner{ font-size:.8rem; padding:.6rem .8rem; }
+
+  .story-paper{ padding:1.25rem; }
+  .story-paper p{ font-size:1rem; }
+  .story-id{ font-size:.88rem !important; padding-left:.6rem; }
+
+  .story-footer-nav{ flex-direction:column; }
+  .story-footer-nav .btn{ width:100%; justify-content:center; }
+
+  /* word-lookup drawer */
+  .drawer{
+    width:94vw;
+    padding:1.3rem 1.1rem 1.5rem;
+  }
+  .drawer.open{ bottom:.7rem; }
+  .drawer-word{ font-size:1.4rem; }
+
+  /* vocab page rows: stack instead of squeezing horizontally */
+  .vocab-row{
+    flex-direction:column;
+    align-items:stretch;
+    gap:.5rem;
+    padding:.9rem 1rem;
+  }
+  .vocab-row .vword{ min-width:0; }
+  .vocab-row .vmeta{ min-width:0; }
+  .vocab-row .icon-btn{ align-self:flex-end; }
+}
