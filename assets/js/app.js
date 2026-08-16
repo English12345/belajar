@@ -122,10 +122,16 @@ function initThemeToggle() {
   if (!btn) return;
   function render() {
     const isComfort = document.documentElement.getAttribute("data-theme") === "comfort";
-    btn.textContent = isComfort ? "☀️ Mode Terang" : "🌙 Mode Nyaman Mata";
+    const short = window.innerWidth <= 480;
+    if (isComfort) {
+      btn.textContent = short ? "☀️ Terang" : "☀️ Mode Terang";
+    } else {
+      btn.textContent = short ? "🌙 Nyaman" : "🌙 Mode Nyaman Mata";
+    }
     btn.setAttribute("aria-pressed", String(isComfort));
   }
   render();
+  window.addEventListener("resize", render);
   btn.addEventListener("click", () => {
     const isComfort = document.documentElement.getAttribute("data-theme") === "comfort";
     const next = isComfort ? "day" : "comfort";
