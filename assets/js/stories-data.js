@@ -71,6 +71,18 @@ const STORIES = [
     words: 370,
     minutes: 4,
   },
+  {
+    id: "difficult-decision",
+    file: "stories/the-difficult-decision.html",
+    emoji: "🧭",
+    title: "The Difficult Decision",
+    titleId: "Keputusan yang Sulit",
+    level: "Sulit",
+    summary:
+      "Farah mempertimbangkan meninggalkan pekerjaan mapan untuk membangun bisnisnya sendiri. Kosakata kaya, kalimat kompleks, cocok untuk level lanjutan.",
+    words: 630,
+    minutes: 7,
+  },
 ];
 
 // expose globally for index.html / vocab.html
